@@ -28,16 +28,39 @@
             </div>
           </form>
 
-          <hr />
+          <br />
 
-          <table>
+          @if(isset($notas[0]))
+          <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th></th>
-                <th></th>
+                <th class="w3">#</th>
+                <th class="w8">Num. Nota</th>
+                <th class="w10">Data da Nota</th>
+                <th class="w25">Nome Destinátario</th>
+                <th class="w10">CNPJ</th>
+                <th>Endereço</th>
+                <th class="w10">Valor Total</th>
               </tr>
             </thead>
+            <tbody>
+                @foreach($notas as $nota)
+                <tr>
+                    <td>{{$nota->id}}</td>
+                    <td>{{$nota->nota}}</td>
+                    <td>{{date('d/m/Y', strtotime($nota->data_nota))}}</td>
+                    <td>{{$nota->nome_destino}}</td>
+                    <td>{{$nota->cpf_destino}}</td>
+                    <td>
+                        {{$nota->rua_destino.', '.$nota->num_destino.', '.$nota->bairro_destino.', '.
+                        $nota->municipio_destino.'/'.$nota->uf_destino.', '.$nota->cep_destino }}
+                    </td>
+                    <td>R$ {{number_format($nota->total_nota, 2, ',', '.')}}</td>
+                </tr>
+                @endforeach
+            </tbody>
           </table>
+          @endif
         </div>
     </div>
 </div>
@@ -71,31 +94,16 @@ $(function(){
             $("#msg").slideDown('slow');
             retirarMsg();
         }
-        console.log(response.status);
       }
     });
     function retirarMsg(){
         setTimeout( function (){
             $("#msg").slideUp('slow', function() {});
-        }, 1700);
+        }, 2500);
     }
     setTimeout( function(){
         document.location.reload(true);
-    }, 1900)
+    }, 2600)
   });
 });
-
-  /*
-
-
-  $.ajax({
-    url: '/uploadFile',
-    type: 'POST',
-    data: formData,
-    success: function(data){
-      console.log(data);
-    }
-  })
-  */
-
 </script>

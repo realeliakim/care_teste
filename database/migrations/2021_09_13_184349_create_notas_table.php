@@ -25,6 +25,7 @@ class CreateNotasTable extends Migration
             $table->string('municipio_destino');
             $table->string('uf_destino');
             $table->string('cep_destino');
+            $table->double('total_nota');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

@@ -25,6 +25,7 @@ class Nota extends Model {
     'municipio_destino',
     'uf_destino',
     'cep_destino',
+    'total_nota',
     'user_id'
   ];
 

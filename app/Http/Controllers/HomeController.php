@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $notas = Nota::all()->where('user_id', auth()->user()->id);
+        return view('home', compact('notas'));
     }
 }

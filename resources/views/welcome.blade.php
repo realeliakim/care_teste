@@ -9,6 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/notas.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -23,7 +24,7 @@
     </head>
     <body class="antialiased">
         <div class="bg-home relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-          <div class="logo fixed top-0 right-0 px-6 py-4 sm:block">
+          <div class="logo fixed top-0 left-0 px-6 py-4 sm:block">
             <img src="../images/logo-care.png" alt="Logo" />
           </div>
             @if (Route::has('login'))

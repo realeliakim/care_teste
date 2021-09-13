@@ -8,6 +8,9 @@ use App\Models\Nota;
 
 class NotaController extends Controller {
 
+  public function __construct(){
+    $this->middleware('auth');
+  }
 
   public function uploadFile(Request $request){
 
@@ -30,6 +33,7 @@ class NotaController extends Controller {
       $municipio_destino = '';
       $uf_destino = '';
       $cep_destino = '';
+      $total = 0;
       foreach($xml as $key => $item){
         if(isset($item->infNFe)){
           $cnpj = $item->infNFe->emit->CNPJ;
@@ -44,6 +48,7 @@ class NotaController extends Controller {
           $municipio_destino = $item->infNFe->dest->enderDest->xMun;
           $uf_destino = $item->infNFe->dest->enderDest->UF;
           $cep_destino = $item->infNFe->dest->enderDest->CEP;
+          $total = $item->infNFe->total->ICMSTot->vNF;
         }
         if(isset($item->infProt)){
           $protocol = $item->infProt->nProt;
@@ -77,13 +82,13 @@ class NotaController extends Controller {
       $table->data_nota = $data_nota;
       $table->nome_destino = $nome_destino;
       $table->cpf_destino = $cpf_destino;
-      $table->email_destino = $email_destino;
       $table->rua_destino = $rua_destino;
       $table->num_destino = $num_destino;
       $table->bairro_destino = $bairro_destino;
       $table->municipio_destino = $municipio_destino;
       $table->uf_destino = $uf_destino;
       $table->cep_destino = $cep_destino;
+      $table->total_nota = $total;
       $table->user_id = auth()->user()->id;
       if($table->save()){
         return response()->json([
